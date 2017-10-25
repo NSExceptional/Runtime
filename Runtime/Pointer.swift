@@ -83,7 +83,11 @@ public struct Pointer<Pointee>: Strideable, Hashable, Equatable {
     }
 
     public static func calloc(_ count: Int) -> Pointer {
-        return Pointer(raw: Darwin.calloc(count, 5))
+        #if os(Linux)
+            return Pointer(raw: Glibc.calloc(count, 1))
+        #else
+            return Pointer(raw: Darwin.calloc(count, 1))
+        #endif
     }
 
     public func free(_ count: Int) {

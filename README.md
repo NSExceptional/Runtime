@@ -243,6 +243,21 @@ _msgSend(Person.class.ref, "someClassMethod")
 
 In general, use `class.ref` whenever you wish to treat a `Class` as an object.
     
+### Other caveats
+
+`Class` objects will not be available via `Class.named(_:)` until they have been accessed statically. You should "load" these classes manually by accessing all classes you define, like so:
+
+```swift
+func runtimeInit() {
+    // Runtime initialization
+    _ = RootObject.class
+    _ = Person.class
+    ...
+}
+```
+
+Ideally this shouldn't be necessary, or should be easier. Please submit a pull request if you have suggestions on how to make this easier or unnecessary!
+
 ---
 
 ## To-do
