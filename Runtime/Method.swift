@@ -12,7 +12,7 @@ public class Method: Hashable {
     public typealias Signauture = (returnType: Type, argumentTypes: [Type])
     
     public let name: String
-    public let imp: IMP
+    public var imp: IMP
     public let returnType: Type
     public let argumentTypes: [Type]
 
