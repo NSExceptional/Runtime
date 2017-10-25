@@ -237,10 +237,11 @@ Be sure to continue to declare all ivars and methods inside the `Class` variable
 
 `Class` instances could only be made possible by making `Class` a Swift `class` and not a `struct`, due to limitations in Swift's type system and several abstractions Swift imposes on the user. Therefore, they do not have the same underlying structure as `Object` does (that is, `Class` does not start with the `isa` defined by the `Object` declaration). To call a class method on a class, pass `.ref` as `this`:
 
-    ```swift
-    _msgSend(Person.class.ref, "someClassMethod")
-    ```
-    In general, use `class.ref` whenever you wish to treat a `Class` as an object.
+```swift
+_msgSend(Person.class.ref, "someClassMethod")
+```
+
+In general, use `class.ref` whenever you wish to treat a `Class` as an object.
     
 ---
 
