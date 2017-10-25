@@ -27,7 +27,7 @@ public class Method: Hashable {
         self.imp = imp
     }
 
-    convenience public init(_ name: String, signature: Signauture = (.void, []), _ imp: @escaping IMP) {
+    convenience public init(name: String, signature: Signauture = (.void, []), _ imp: @escaping IMP) {
         self.init(name, returns: signature.returnType, args: signature.argumentTypes, imp)
     }
 

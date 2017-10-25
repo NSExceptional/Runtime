@@ -15,7 +15,7 @@ public struct RootObject {
         isa: RootObject_meta.class,
         superclass: nil,
         name: "Object",
-        ivars: [("_retainCount", .integer)],
+        ivars: [("isa", .pointer(.class("self"))), ("_retainCount", .integer)],
         methods: [_init, retain, retainCount]
     )
 
@@ -36,6 +36,23 @@ public struct RootObject {
         }
 
         return retain$(this, _cmd)
+    }
+
+    static var release = Method("release") { this, _cmd, args in
+        func release$(_ this: id, _ _cmd: SEL) {
+            let newCount: Int = (this|"_retainCount") - 1
+            this |= (newCount, "_retainCount")
+            if newCount < 1 {
+                if newCount < 0 {
+                    fatalError("Over-released object at \(this.raw.debugDescription)")
+                }
+                
+                this.free()
+            }
+        }
+
+        release$(this, _cmd)
+        return ()
     }
 
     static var retainCount = Method("retainCount", returns: .integer) { this, _cmd, args in

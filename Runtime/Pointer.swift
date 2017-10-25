@@ -90,6 +90,14 @@ public struct Pointer<Pointee>: Strideable, Hashable, Equatable {
         #endif
     }
 
+    public func free() {
+        #if os(Linux)
+            Glibc.free(self.raw)
+        #else
+            Darwin.free(self.raw)
+        #endif
+    }
+
     public func free(_ count: Int) {
         self.raw.deallocate(bytes: count, alignedTo: MemoryLayout<Pointee>.alignment)
     }
