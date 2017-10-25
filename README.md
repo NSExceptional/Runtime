@@ -25,7 +25,7 @@ Runtime metadata types provided by this framework mirrors that of the public Obj
 
 A base class, `RootObject`, is provided for other classes to inherit from if they wish. New classes are defined by declaring a `struct` type to enclose the `Class` object in, with the class object itself being declared as a `static let`, followed by method variables.
 
-```objc
+```swift
 struct Person {
     static let `class` = Class(
         isa: Person_meta.class,
